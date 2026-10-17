@@ -1,246 +1,269 @@
-import { useMemo, useState } from 'react'
-import { Link, Route, Routes } from 'react-router-dom'
-import {
-  ArrowDown,
-  ArrowRight,
-  Check,
-  ChevronDown,
-  Flower2,
-  Heart,
-  Menu,
-  Search,
-  Sparkles,
-  X,
-} from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
-import TemplateCard from './components/TemplateCard'
-import TemplateDialog from './components/TemplateDialog'
-import { categories, templates, type InvitationTemplate } from './data/templates'
+import { ArrowUp, CalendarPlus, Check, Copy, MapPin, Share2, MessageCircle, Clock } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { engagement, formattedDate, formattedDateTe, hasVenue } from './data/engagement'
+import { copyLink, downloadIcs, nativeShare, whatsappUrl, type ShareResult } from './lib'
+import { CornerOrnament, Divider, JasmineGarland, Kolam, Lamp, Lotus, TempleArch, Toranam } from './components/Art'
+import Countdown from './components/Countdown'
+import Gallery from './components/Gallery'
+import Opening from './components/Opening'
+import Reveal from './components/Reveal'
 
-function StudioPage() {
-  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>('All styles')
-  const [search, setSearch] = useState('')
-  const [previewTemplate, setPreviewTemplate] = useState<InvitationTemplate | null>(null)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [selectionMessage, setSelectionMessage] = useState('')
-  const [menuOpen, setMenuOpen] = useState(false)
+const { person1, person2, messages, event, venue } = engagement
 
-  const visibleTemplates = useMemo(() => {
-    const normalizedSearch = search.trim().toLocaleLowerCase()
-    return templates.filter((template) => {
-      const matchesCategory = activeCategory === 'All styles' || template.category === activeCategory
-      const matchesSearch =
-        !normalizedSearch ||
-        `${template.name} ${template.description} ${template.language} ${template.category}`
-          .toLocaleLowerCase()
-          .includes(normalizedSearch)
-      return matchesCategory && matchesSearch
-    })
-  }, [activeCategory, search])
-
-  const selectedTemplate = templates.find((template) => template.id === selectedId)
-
-  const selectTemplate = (template: InvitationTemplate) => {
-    setSelectedId(template.id)
-    setSelectionMessage(`${template.name} is selected. Your invitation will start with this design.`)
-    setPreviewTemplate(null)
-  }
-
+function Section({ children, className = '', labelledBy }: { children: React.ReactNode; className?: string; labelledBy?: string }) {
   return (
-    <div className="site-shell">
-      <div className="demo-banner">
-        <span className="demo-dot" />
-        DEMO MODE <span className="demo-divider">·</span> Explore all the designs, no account needed
-      </div>
-      <header className="site-header">
-        <Link className="brand" to="/" aria-label="Vivaha Studio home">
-          <span className="brand-mark"><Flower2 size={21} strokeWidth={1.45} /></span>
-          <span>vivaha<span className="brand-light"> studio</span></span>
-        </Link>
-        <button className="menu-toggle icon-button" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen}>
-          {menuOpen ? <X size={21} /> : <Menu size={21} />}
-        </button>
-        <nav className={`main-nav${menuOpen ? ' nav-open' : ''}`} aria-label="Main navigation">
-          <a href="#gallery" onClick={() => setMenuOpen(false)}>Invitation designs</a>
-          <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>Our story</a>
-          <Link className="button button-dark nav-cta" to="/templates#gallery" onClick={() => setMenuOpen(false)}>
-            Find your design <ArrowRight size={15} />
-          </Link>
-        </nav>
-      </header>
+    <section className={`px-5 py-20 sm:py-28 ${className}`} aria-labelledby={labelledBy}>
+      <div className="mx-auto max-w-3xl text-center">{children}</div>
+    </section>
+  )
+}
 
-      <main>
-        <section className="hero-section">
-          <div className="hero-copy">
-            <div className="eyebrow hero-eyebrow"><span className="eyebrow-line" /> Made for your kind of forever</div>
-            <h1>A little invite.<br /><em>A lot of</em> <span className="hero-scribble">meaning.</span></h1>
-            <p className="hero-description">
-              Your wedding story deserves more than a forwarded message. Create a beautiful digital invitation made with your traditions, your people, your kind of love.
-            </p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#gallery">Explore the designs <ArrowRight size={17} /></a>
-              <a className="text-link" href="#how-it-works">See how it works <ArrowDown size={15} /></a>
-            </div>
-            <div className="hero-footnote"><span className="avatar-stack"><i>A</i><i>R</i><i>♡</i></span><span>Made for meaningful beginnings</span></div>
-          </div>
-          <div className="hero-art">
-            <div className="hero-stamp"><span>DESIGNED<br />WITH LOVE</span><Heart size={15} /></div>
-            <motion.div
-              className="hero-invitation-wrap"
-              initial={{ opacity: 0, y: 24, rotate: 1.5 }}
-              animate={{ opacity: 1, y: 0, rotate: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
-              <div className="hero-invitation-paper">
-                <div className="hero-flower"><Flower2 size={24} strokeWidth={1} /></div>
-                <span className="hero-invitation-kicker">With blessings from our families</span>
-                <div className="hero-names">Ananya <span>&</span><br />Arjun</div>
-                <div className="hero-invite-rule"><i /><Heart size={12} /><i /></div>
-                <span className="hero-invitation-line">request the pleasure of your company</span>
-                <div className="hero-wedding-date">12 · 02 · 2026</div>
-                <span className="hero-invitation-location">Hyderabad, India</span>
-                <div className="hero-flower-bottom"><Flower2 size={19} strokeWidth={1} /></div>
-              </div>
-            </motion.div>
-            <div className="hero-note"><span className="note-star">✳</span><span>Yours, in every detail</span></div>
-            <div className="hero-small-card"><span className="small-card-flower">✿</span><span>Telugu, Hindi<br />& English ready</span></div>
-          </div>
-          <span className="hero-vertical-label">CELEBRATE YOUR WAY — EST. WITH LOVE</span>
-        </section>
+function Announcement() {
+  return (
+    <Section labelledBy="announce-h">
+      <Reveal>
+        <div className="frame px-5 py-14 sm:px-14">
+          <CornerOrnament className="absolute -left-1 -top-1 w-12 sm:w-16" />
+          <CornerOrnament className="absolute -right-1 -top-1 w-12 -scale-x-100 sm:w-16" />
+          <CornerOrnament className="absolute -bottom-1 -left-1 w-12 -scale-y-100 sm:w-16" />
+          <CornerOrnament className="absolute -bottom-1 -right-1 w-12 -scale-100 sm:w-16" />
+          <Lotus className="mx-auto mb-4 w-16" />
+          <h2 id="announce-h" lang="te" className="te text-2xl font-semibold text-maroon sm:text-3xl">నిశ్చితార్థ ఆహ్వానం</h2>
+          <p lang="te" className="te mx-auto mt-3 max-w-xl text-base text-maroon-soft sm:text-lg">{messages.announceIntroTe}</p>
+          <Divider className="my-6" />
+          <p className="display mx-auto max-w-xl text-xl text-maroon sm:text-2xl">{messages.announceIntro}</p>
+          <p className="display mt-6 text-4xl font-medium text-maroon sm:text-5xl">{person1.en}</p>
+          <p className="display my-1 text-2xl italic text-gold">and</p>
+          <p className="display text-4xl font-medium text-maroon sm:text-5xl">{person2.en}</p>
+          <p lang="te" className="te mt-3 text-lg text-maroon-soft">{person1.te} &amp; {person2.te}</p>
+          <Divider className="my-6" />
+          <p className="display mx-auto max-w-xl text-lg italic text-maroon-soft sm:text-xl">{messages.announceOutro}</p>
+          <p lang="te" className="te mx-auto mt-3 max-w-xl text-base text-maroon-soft sm:text-lg">{messages.announceOutroTe}</p>
+        </div>
+      </Reveal>
+    </Section>
+  )
+}
 
-        <section className="intro-strip" aria-label="Invitation highlights">
-          <span>Rooted in tradition</span><i /><span>Made for every love story</span><i /><span>Easy to share, lovely to keep</span>
-        </section>
+function NameArt() {
+  return (
+    <section className="relative overflow-hidden bg-paper px-5 py-24 sm:py-32" aria-labelledby="names-h">
+      <TempleArch className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-full w-full max-w-md opacity-40" />
+      <JasmineGarland className="absolute left-0 top-6 w-32 sm:w-56" count={6} />
+      <JasmineGarland className="absolute right-0 top-6 w-32 sm:w-56" count={6} />
+      <Reveal className="relative mx-auto max-w-2xl text-center">
+        <p lang="te" className="te text-lg text-maroon-soft">నిశ్చితార్థం</p>
+        <p className="eyebrow mt-1">The Engagement of</p>
+        <h2 id="names-h" className="display mt-8 text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person1.short}</h2>
+        <p lang="te" className="te text-xl text-maroon-soft">{person1.teShort}</p>
+        <div className="my-5 flex items-center justify-center gap-4" aria-hidden="true">
+          <span className="h-px w-16 bg-gold sm:w-28" />
+          <Lamp className="w-7" />
+          <span className="display text-4xl italic text-gold">&amp;</span>
+          <Lamp className="w-7" />
+          <span className="h-px w-16 bg-gold sm:w-28" />
+        </div>
+        <p className="display text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person2.short}</p>
+        <p lang="te" className="te text-xl text-maroon-soft">{person2.teShort}</p>
+        <Divider className="mt-8" />
+        <p className="eyebrow mt-6 !text-maroon">{formattedDate()}</p>
+        <Kolam className="mx-auto mt-8 w-32" />
+      </Reveal>
+    </section>
+  )
+}
 
-        <section className="gallery-section section-pad" id="gallery">
-          <div className="section-heading gallery-heading">
-            <div>
-              <span className="eyebrow"><span className="eyebrow-line" /> The invitation edit</span>
-              <h2>Find the feeling<br />that feels like <em>you.</em></h2>
-            </div>
-            <p>Twelve original starting points, inspired by the colors, rituals, and little in-between moments that make an Indian wedding yours.</p>
-          </div>
+function CountdownSection() {
+  return (
+    <Section labelledBy="count-h">
+      <Reveal>
+        <p lang="te" className="te text-lg text-maroon-soft">నిశ్చితార్థానికి ఇంకా</p>
+        <h2 id="count-h" className="display mb-8 text-3xl text-maroon sm:text-4xl">Until Our Engagement</h2>
+        <Countdown />
+      </Reveal>
+    </Section>
+  )
+}
 
-          {selectedTemplate && (
-            <div className="selection-notice" role="status">
-              <span className="selection-check"><Check size={16} /></span>
-              <span><strong>{selectedTemplate.name}</strong> is your chosen starting point. {selectionMessage}</span>
-              <button type="button" onClick={() => setSelectedId(null)} aria-label="Clear selected design"><X size={16} /></button>
-            </div>
-          )}
-
-          <div className="gallery-toolbar">
-            <div className="category-filters" aria-label="Filter invitation templates">
-              {categories.map((category) => (
-                <button
-                  className={`filter-chip${activeCategory === category ? ' active' : ''}`}
-                  key={category}
-                  type="button"
-                  aria-pressed={activeCategory === category}
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category}
-                  {category === 'All styles' && <span className="filter-count">{templates.length}</span>}
-                </button>
-              ))}
-            </div>
-            <label className="template-search">
-              <Search size={16} aria-hidden="true" />
-              <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Find a style" aria-label="Search invitation templates" />
-            </label>
-          </div>
-
-          {visibleTemplates.length > 0 ? (
-            <div className="template-grid">
-              {visibleTemplates.map((template, index) => (
-                <TemplateCard
-                  key={template.id}
-                  template={template}
-                  index={index}
-                  selected={selectedId === template.id}
-                  onPreview={setPreviewTemplate}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="empty-state">
-              <Flower2 size={26} />
-              <h3>No invitations found</h3>
-              <p>Try another name or choose a different style.</p>
-              <button className="text-link" type="button" onClick={() => { setSearch(''); setActiveCategory('All styles') }}>Show all invitations <ArrowRight size={15} /></button>
-            </div>
-          )}
-          <div className="gallery-bottom"><span>Showing {visibleTemplates.length} of {templates.length} designs</span><a href="#how-it-works">What happens next? <ArrowRight size={14} /></a></div>
-        </section>
-
-        <section className="why-section section-pad" id="how-it-works">
-          <div className="why-decoration" aria-hidden="true"><Flower2 size={205} strokeWidth={0.55} /></div>
-          <div className="why-copy">
-            <span className="eyebrow"><span className="eyebrow-line" /> Thoughtful by design</span>
-            <h2>A wedding invite<br />should feel like <em>coming home.</em></h2>
-            <p>We believe the best celebrations make room for every generation, every language, and every way of saying “we’re so glad you’re here.”</p>
-            <a className="button button-dark" href="#gallery">Find your starting point <ArrowRight size={16} /></a>
-          </div>
-          <div className="values-grid">
-            <article className="value-card">
-              <span className="value-number">01</span><span className="value-icon"><Flower2 size={21} /></span>
-              <h3>Made for your rituals</h3><p>From the first haldi to the final dance, your traditions belong in the story.</p>
-            </article>
-            <article className="value-card">
-              <span className="value-number">02</span><span className="value-icon"><Heart size={20} /></span>
-              <h3>Every language, welcome</h3><p>Say it in Telugu, Hindi, English—or the words that feel like home.</p>
-            </article>
-            <article className="value-card">
-              <span className="value-number">03</span><span className="value-icon"><Sparkles size={20} /></span>
-              <h3>Lovely, not complicated</h3><p>A beautiful place for your details, ready to share with your favorite people.</p>
-            </article>
-          </div>
-        </section>
-
-        <section className="closing-section section-pad" id="about">
-          <span className="closing-flower closing-flower-left" aria-hidden="true">✿</span>
-          <span className="eyebrow">A little more you. A little less ordinary.</span>
-          <h2>Let’s make something<br /><em>worth keeping.</em></h2>
-          <a className="button button-primary" href="#gallery">Start with a design <ArrowRight size={16} /></a>
-          <span className="closing-flower closing-flower-right" aria-hidden="true">✳</span>
-        </section>
-      </main>
-
-      <footer className="site-footer">
-        <Link className="brand footer-brand" to="/">
-          <span className="brand-mark"><Flower2 size={20} strokeWidth={1.45} /></span>
-          <span>vivaha<span className="brand-light"> studio</span></span>
-        </Link>
-        <span>Made with care for your once-in-a-lifetime kind of love.</span>
-        <a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>Back to top <ChevronDown size={14} className="back-to-top-icon" /></a>
-      </footer>
-
-      <TemplateDialog
-        template={previewTemplate}
-        selectedId={selectedId}
-        onClose={() => setPreviewTemplate(null)}
-        onSelect={selectTemplate}
-      />
-      <AnimatePresence>
-        {selectionMessage && selectedTemplate && (
-          <motion.div className="selection-toast" role="status" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }}>
-            <span><Check size={16} /></span>
-            <span>{selectedTemplate.name} selected</span>
-            <button type="button" onClick={() => setSelectionMessage('')} aria-label="Dismiss selection message"><X size={15} /></button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+function Row({ icon, label, children }: { icon: React.ReactNode; label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col items-center gap-1 py-5">
+      <span className="text-gold-deep">{icon}</span>
+      <p className="eyebrow">{label}</p>
+      <div className="display text-xl text-maroon sm:text-2xl">{children}</div>
     </div>
   )
 }
 
-export default function App() {
+function Details() {
+  const showVenue = hasVenue()
   return (
-    <Routes>
-      <Route path="/" element={<StudioPage />} />
-      <Route path="/templates" element={<StudioPage />} />
-      <Route path="*" element={<StudioPage />} />
-    </Routes>
+    <section className="bg-paper px-5 py-20 sm:py-28" aria-labelledby="details-h">
+      <Reveal className="mx-auto max-w-xl text-center">
+        <p lang="te" className="te text-lg text-maroon-soft">వేడుక వివరాలు</p>
+        <h2 id="details-h" className="display text-4xl text-maroon sm:text-5xl">Event Details</h2>
+        <div className="frame mt-8 divide-y divide-gold/30 px-5 py-4">
+          <Row icon={<Lotus className="w-10" />} label="Event">
+            {event.titleEn} <span lang="te" className="te block text-lg text-maroon-soft">{event.titleTe}</span>
+          </Row>
+          <Row icon={<CalendarPlus size={20} />} label="Date">
+            {formattedDate()}
+            <span lang="te" className="te block text-base text-maroon-soft">{formattedDateTe()}</span>
+          </Row>
+          {event.timeLabel && (
+            <Row icon={<Clock size={20} />} label="Time">{event.timeLabel}</Row>
+          )}
+          {showVenue && (
+            <Row icon={<MapPin size={20} />} label="Venue">
+              {venue.name}
+              <span className="block font-sans text-base text-maroon-soft">{venue.address}</span>
+            </Row>
+          )}
+        </div>
+        {!showVenue && (
+          <p className="mt-4 text-sm italic text-maroon-soft">Time and venue details will be shared soon.</p>
+        )}
+        {import.meta.env.DEV && !showVenue && (
+          <p className="mt-2 text-xs text-maroon">[dev] Fill in venue.name and venue.address in src/data/engagement.ts</p>
+        )}
+        <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
+          {venue.mapUrl && (
+            <a className="btn btn-primary" href={venue.mapUrl} target="_blank" rel="noopener noreferrer">
+              <MapPin size={16} /> Get Directions
+            </a>
+          )}
+          <button type="button" className="btn btn-ghost" onClick={downloadIcs}>
+            <CalendarPlus size={16} /> Add to Calendar
+          </button>
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
+function Blessings() {
+  const fams = engagement.families.filter((f) => f.names.trim())
+  return (
+    <Section labelledBy="bless-h">
+      <Reveal>
+        <div className="frame px-6 py-14 sm:px-14">
+          <Lotus className="mx-auto mb-4 w-14" />
+          <h2 id="bless-h" className="display text-3xl text-maroon sm:text-4xl">{messages.familyHeading}</h2>
+          <p lang="te" className="te mt-2 text-lg text-maroon-soft">{messages.familyHeadingTe}</p>
+          <Divider className="my-6" />
+          {fams.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2">
+              {fams.map((f) => (
+                <div key={f.label}>
+                  <p className="eyebrow">{f.label}</p>
+                  <p className="display mt-1 text-xl text-maroon">{f.names}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <p className="display mx-auto max-w-lg text-lg italic text-maroon-soft sm:text-xl">{messages.familyGeneral}</p>
+              <p lang="te" className="te mx-auto mt-3 max-w-lg text-base text-maroon-soft">{messages.familyGeneralTe}</p>
+            </>
+          )}
+        </div>
+      </Reveal>
+    </Section>
+  )
+}
+
+function Closing() {
+  const [status, setStatus] = useState<ShareResult | null>(null)
+  const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function'
+  useEffect(() => {
+    if (!status) return
+    const t = setTimeout(() => setStatus(null), 4000)
+    return () => clearTimeout(t)
+  }, [status])
+  const run = async (fn: () => Promise<ShareResult>) => {
+    const r = await fn()
+    if (r.message) setStatus(r)
+  }
+  return (
+    <section className="paper relative overflow-hidden px-5 pb-24 pt-20 sm:pt-28" aria-labelledby="closing-h">
+      <Toranam className="absolute inset-x-0 top-0 mx-auto w-full max-w-md opacity-90" />
+      <Reveal className="relative mx-auto mt-14 max-w-2xl text-center">
+        <div className="frame px-6 py-14 sm:px-12">
+          <JasmineGarland className="absolute -left-2 -top-3 w-24 sm:w-32" count={4} />
+          <JasmineGarland className="absolute -right-2 -top-3 w-24 sm:w-32" count={4} />
+          <h2 id="closing-h" className="display text-2xl text-maroon sm:text-3xl">{messages.closing1}</h2>
+          <p className="display mt-4 text-lg italic text-maroon-soft sm:text-xl">{messages.closing2}</p>
+          <p lang="te" className="te mt-4 text-base text-maroon-soft">{messages.closingTe}</p>
+          <Divider className="my-6" />
+          <p className="display text-xl italic text-gold-deep">{messages.closingWith}</p>
+          <p className="display mt-1 text-3xl font-medium text-maroon sm:text-4xl">{person1.en} &amp; {person2.en}</p>
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap">
+            {canShare && (
+              <button type="button" className="btn btn-primary" onClick={() => run(nativeShare)}>
+                <Share2 size={16} /> Share Our Invitation
+              </button>
+            )}
+            <a className={`btn ${canShare ? 'btn-ghost' : 'btn-primary'}`} href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={16} /> {canShare ? 'WhatsApp' : 'Share Our Invitation on WhatsApp'}
+            </a>
+            <button type="button" className="btn btn-ghost" onClick={() => run(copyLink)}>
+              <Copy size={16} /> Copy Link
+            </button>
+          </div>
+          <p role="status" aria-live="polite" className={`mt-4 min-h-6 text-sm ${status?.ok ? 'text-sage' : 'text-maroon'}`}>
+            {status && (<>{status.ok && <Check size={14} className="mr-1 inline" />}{status.message}</>)}
+          </p>
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
+export default function App() {
+  const [opened, setOpened] = useState(false)
+  const [showTop, setShowTop] = useState(false)
+
+  useEffect(() => {
+    const r = document.documentElement.style
+    const t = engagement.theme
+    r.setProperty('--color-ivory', t.ivory)
+    r.setProperty('--color-paper', t.paper)
+    r.setProperty('--color-gold', t.gold)
+    r.setProperty('--color-gold-soft', t.goldSoft)
+    r.setProperty('--color-maroon', t.maroon)
+    r.setProperty('--color-maroon-soft', t.maroonSoft)
+    r.setProperty('--color-sage', t.green)
+  }, [])
+
+  useEffect(() => {
+    const on = () => setShowTop(window.scrollY > 700)
+    window.addEventListener('scroll', on, { passive: true })
+    return () => window.removeEventListener('scroll', on)
+  }, [])
+
+  return (
+    <>
+      {!opened && <Opening onOpened={() => { setOpened(true); window.scrollTo(0, 0) }} />}
+      {opened && (
+        <main className="paper">
+          <Announcement />
+          <NameArt />
+          <CountdownSection />
+          <Details />
+          <Blessings />
+          <Gallery />
+          <Closing />
+          <footer className="bg-maroon px-5 py-6 text-center text-xs tracking-widest text-gold-soft">
+            {person1.short} &amp; {person2.short} · {formattedDate()}
+          </footer>
+          {showTop && (
+            <button type="button" aria-label="Back to top" className="fixed bottom-4 right-4 z-40 grid size-12 place-items-center rounded-full border border-gold bg-ivory text-maroon shadow-lg"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <ArrowUp size={20} />
+            </button>
+          )}
+        </main>
+      )}
+    </>
   )
 }
