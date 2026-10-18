@@ -2,6 +2,7 @@
  * Single source of truth for the invitation.
  * Edit this file only. Leave optional fields empty ('' / null / []) to hide them.
  */
+import musicFile from '../assets/music/Sita kalyanaaa music.mp3'
 export interface EngagementConfig {
   person1: { en: string; te: string; short: string; teShort: string }
   person2: { en: string; te: string; short: string; teShort: string }
@@ -54,49 +55,52 @@ export interface EngagementConfig {
 }
 
 export const engagement: EngagementConfig = {
-  person1: { en: 'Bhargav Makina', te: 'భార్గవ్ మాకినా', short: 'Bhargav', teShort: 'భార్గవ్' },
-  person2: { en: 'Abhizna Lankoji', te: 'అభిజ్ఞ లంకోజి', short: 'Abhizna', teShort: 'అభిజ్ఞ' },
+  person1: { en: 'Bhargav Makina', te: 'వెంకట భర్గవ్', short: 'Bhargav', teShort: 'భర్గవ్' },
+  person2: { en: 'Abhizna Lankoji', te: 'అభిజ్ఞ', short: 'Abhizna', teShort: 'అభిజ్ఞ' },
   event: {
     titleEn: 'Engagement Ceremony',
-    titleTe: 'నిశ్చితార్థం',
+    titleTe: 'నిశ్చితార్థ వేడుక',
     date: '2026-10-30',
-    time: '',
-    timeLabel: '',
+    time: '19:30',
+    timeLabel: '7:30 PM',
     timeZone: 'Asia/Kolkata',
     utcOffset: '+05:30',
     durationHours: 3,
   },
-  // Leave venue empty until confirmed; the venue card stays hidden.
-  venue: { name: '', address: '', mapUrl: '' },
+  venue: {
+    name: 'Pallem Maneswari Nilayam',
+    address: '41-1/3-44, 2nd Line, Dwarakanagar, Krishna Lanka, Vijayawada, Andhra Pradesh 520013',
+    mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Pallem Maneswari Nilayam, 41-1/3-44, 2nd Line, Dwarakanagar, Krishna Lanka, Vijayawada, Andhra Pradesh 520013')}`
+  },
   messages: {
-    openingBlessing: 'With the blessings of our families',
-    tagline: 'Two families, one beautiful beginning.',
+    openingBlessing: 'కుటుంబ ఆశీర్వాదాలతో',
+    tagline: 'రెండు కుటుంబాలు, ఒక సుందరమైన ప్రారంభం',
     announceIntro:
-      'With immense joy and the blessings of our families, we invite you to celebrate the engagement of',
+      'ఆనందంతో కూడిన మన హృదయాలతో, మీ సందర్శనకు ఆహ్వానిస్తున్నాము మా నిశ్చితార్థ వేడుకను ఆచరించమని. మీ ఉపస్థితి మరియు ఆశీర్వాదాలు ఈ ప్రత్యేక సందర్భాన్ని మరింత జ్ఞాపకీయంగా చేస్తాయి.',
     announceOutro:
-      'Join us as we celebrate a beautiful new beginning filled with love, happiness, and togetherness.',
+      'మా కుటుంబాల ఆశీర్వాదాలతో, మీ ఎందరినీ సాదరంగా ఆహ్వానిస్తున్నాము మా నిశ్చితార్థ వేడుకను ఆచరించమని మరియు ఈ ప్రత్యేక ప్రారంభానికి సంబంధించిన ఆనందంలో భాగస్వామ్యమయ్యేందుకు.',
     announceIntroTe:
-      'అపారమైన ఆనందంతో, మా కుటుంబాల ఆశీర్వాదాలతో, మీ అందరినీ ఈ నిశ్చితార్థ వేడుకకు సాదరంగా ఆహ్వానిస్తున్నాము',
+      'ఆనందంతో కూడిన మన హృదయాలతో, మీ సందర్శనకు ఆహ్వానిస్తున్నాము',
     announceOutroTe:
       'ప్రేమ, ఆనందం, ఆత్మీయతలతో నిండిన ఈ కొత్త ప్రారంభంలో మాతో కలిసి పాలుపంచుకోండి.',
-    familyHeading: 'With the love and blessings of our families',
-    familyHeadingTe: 'మా కుటుంబాల ప్రేమ ఆశీర్వాదాలతో',
+    familyHeading: 'మా కుటుంబాల ప్రేమ ఆశీర్వాదాలతో',
+    familyHeadingTe: 'కుటుంబ ఆశీర్వాదం',
     familyGeneral:
-      'Our families are the foundation of this joyful beginning, and we ask for your warm wishes as we take this step together.',
-    familyGeneralTe:
       'మా కుటుంబాలే ఈ శుభారంభానికి పునాది. ఈ అడుగులో మీ ఆత్మీయ శుభాకాంక్షలు మాకు కావాలి.',
-    closing1: 'We look forward to celebrating this special moment with you.',
-    closing2: 'Your presence and blessings will make our day even more memorable.',
-    closingWith: 'With love,',
+    familyGeneralTe:
+      'ఈ జీవన సఫరంలో మీ దీవెనలతో మాకు కూడా కంపెనీ ఉండాలని కోరుకుంటున్నాము.',
+    closing1: 'ఈ విశేష క్షణాన్ని మీతో కలిసి ఆచరించటానికి ఎంతగా ఆశ్వాస్తున్నాము.',
+    closing2: 'మీ రాక మరియు ఆశీర్వాదాలు మా వేడుకను మరింత జ్ఞాపకీయంగా చేస్తాయి.',
+    closingWith: 'ప్రేమతో,',
     closingTe: 'మీ రాక, మీ ఆశీస్సులు మా నిశ్చితార్థ వేడుకకు మరింత శోభను చేకూరుస్తాయి.',
-    afterEvent: 'A beautiful beginning to remember.',
-    onEventDay: 'Today is our engagement. Thank you for your blessings!',
+    afterEvent: 'సుందరమైన ప్రారంభం జరిగింది.',
+    onEventDay: 'ఈ రోజే మా నిశ్చితార్థం. మీ ఆశీస్సులకు ధన్యవాదాలు!',
     onEventDayTe: 'ఈ రోజే మా నిశ్చితార్థం. మీ ఆశీస్సులకు ధన్యవాదాలు!',
   },
   families: [],
   gallery: [],
   shareImage: '',
-  music: '',
+  music: musicFile,
   theme: {
     ivory: '#FFF9F0',
     paper: '#F5EBDD',
@@ -107,9 +111,9 @@ export const engagement: EngagementConfig = {
     green: '#4E624B',
   },
   seo: {
-    title: 'Bhargav & Abhizna | Engagement Invitation',
+    title: 'భర్గవ్ & అభిజ్ఞ | నిశ్చితార్థ ఆహ్వానం',
     description:
-      'An invitation to celebrate the engagement of Bhargav Makina and Abhizna Lankoji on Friday, 30 October 2026.',
+      '2026 అక్టోబర్ 30న భర్గవ్ మకినా మరియు అభిజ్ఞ లంకోజి నిశ్చితార్థ వేడుకకు ఆహ్వానం.',
   },
 }
 

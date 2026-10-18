@@ -111,7 +111,7 @@ export function Divider({ className = '' }: { className?: string }) {
   )
 }
 
-/** Temple-inspired arch (gopuram-like tiers + ogee arch). Sized by parent. */
+/** Temple-inspired arch (gopuram-like tiers + decorative finial). Sized by parent. */
 export function TempleArch({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 300 420" className={className} aria-hidden="true" preserveAspectRatio="xMidYMax meet">
@@ -119,8 +119,7 @@ export function TempleArch({ className = '' }: { className?: string }) {
         <path d="M30 420 V190 C30 110 110 90 150 30 C190 90 270 110 270 190 V420" />
         <path d="M46 420 V196 C46 124 118 104 150 52 C182 104 254 124 254 196 V420" stroke={GS} />
         <path d="M62 420 V200 C62 140 124 120 150 76 C176 120 238 140 238 200 V420" strokeWidth=".8" />
-        <path d="M150 8 V30 M140 20 H160" stroke={M} />
-        <circle cx="150" cy="6" r="3" fill={G} />
+        <circle cx="150" cy="12" r="5" fill={G} />
         {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
           <g key={i}>
             <circle cx={36} cy={200 + i * 27} r="1.8" fill={G} />

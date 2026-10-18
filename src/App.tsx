@@ -5,6 +5,7 @@ import { copyLink, downloadIcs, nativeShare, whatsappUrl, type ShareResult } fro
 import { CornerOrnament, Divider, JasmineGarland, Kolam, Lamp, Lotus, TempleArch, Toranam } from './components/Art'
 import Countdown from './components/Countdown'
 import Gallery from './components/Gallery'
+import MusicControl from './components/MusicControl'
 import Opening from './components/Opening'
 import Reveal from './components/Reveal'
 
@@ -28,16 +29,15 @@ function Announcement() {
           <CornerOrnament className="absolute -bottom-1 -left-1 w-12 -scale-y-100 sm:w-16" />
           <CornerOrnament className="absolute -bottom-1 -right-1 w-12 -scale-100 sm:w-16" />
           <Lotus className="mx-auto mb-4 w-16" />
-          <h2 id="announce-h" lang="te" className="te text-2xl font-semibold text-maroon sm:text-3xl">నిశ్చితార్థ ఆహ్వానం</h2>
+          <h2 id="announce-h" className="display text-2xl font-semibold text-maroon sm:text-3xl">Engagement Celebration</h2>
           <p lang="te" className="te mx-auto mt-3 max-w-xl text-base text-maroon-soft sm:text-lg">{messages.announceIntroTe}</p>
           <Divider className="my-6" />
-          <p className="display mx-auto max-w-xl text-xl text-maroon sm:text-2xl">{messages.announceIntro}</p>
-          <p className="display mt-6 text-4xl font-medium text-maroon sm:text-5xl">{person1.en}</p>
-          <p className="display my-1 text-2xl italic text-gold">and</p>
-          <p className="display text-4xl font-medium text-maroon sm:text-5xl">{person2.en}</p>
-          <p lang="te" className="te mt-3 text-lg text-maroon-soft">{person1.te} &amp; {person2.te}</p>
+          <p lang="te" className="te mx-auto max-w-xl text-xl text-maroon sm:text-2xl">{messages.announceIntro}</p>
+          <p lang="te" className="te mt-6 text-4xl font-medium text-maroon sm:text-5xl">{person1.te}</p>
+          <p className="display my-1 text-2xl italic text-gold">&amp;</p>
+          <p lang="te" className="te text-4xl font-medium text-maroon sm:text-5xl">{person2.te}</p>
           <Divider className="my-6" />
-          <p className="display mx-auto max-w-xl text-lg italic text-maroon-soft sm:text-xl">{messages.announceOutro}</p>
+          <p lang="te" className="te mx-auto max-w-xl text-lg italic text-maroon-soft sm:text-xl">{messages.announceOutro}</p>
           <p lang="te" className="te mx-auto mt-3 max-w-xl text-base text-maroon-soft sm:text-lg">{messages.announceOutroTe}</p>
         </div>
       </Reveal>
@@ -54,7 +54,7 @@ function NameArt() {
       <Reveal className="relative mx-auto max-w-2xl text-center">
         <p lang="te" className="te text-lg text-maroon-soft">నిశ్చితార్థం</p>
         <p className="eyebrow mt-1">The Engagement of</p>
-        <h2 id="names-h" className="display mt-8 text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person1.short}</h2>
+        <h2 id="names-h" lang="te" className="te display mt-8 text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person1.short}</h2>
         <p lang="te" className="te text-xl text-maroon-soft">{person1.teShort}</p>
         <div className="my-5 flex items-center justify-center gap-4" aria-hidden="true">
           <span className="h-px w-16 bg-gold sm:w-28" />
@@ -63,7 +63,7 @@ function NameArt() {
           <Lamp className="w-7" />
           <span className="h-px w-16 bg-gold sm:w-28" />
         </div>
-        <p className="display text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person2.short}</p>
+        <p lang="te" className="te display text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person2.short}</p>
         <p lang="te" className="te text-xl text-maroon-soft">{person2.teShort}</p>
         <Divider className="mt-8" />
         <p className="eyebrow mt-6 !text-maroon">{formattedDate()}</p>
@@ -104,7 +104,8 @@ function Details() {
         <h2 id="details-h" className="display text-4xl text-maroon sm:text-5xl">Event Details</h2>
         <div className="frame mt-8 divide-y divide-gold/30 px-5 py-4">
           <Row icon={<Lotus className="w-10" />} label="Event">
-            {event.titleEn} <span lang="te" className="te block text-lg text-maroon-soft">{event.titleTe}</span>
+            <span className="block text-lg text-maroon">{event.titleEn}</span>
+            <span lang="te" className="te block text-base text-maroon-soft">{event.titleTe}</span>
           </Row>
           <Row icon={<CalendarPlus size={20} />} label="Date">
             {formattedDate()}
@@ -121,7 +122,7 @@ function Details() {
           )}
         </div>
         {!showVenue && (
-          <p className="mt-4 text-sm italic text-maroon-soft">Time and venue details will be shared soon.</p>
+          <p lang="te" className="te mt-4 text-sm italic text-maroon-soft">సమయం మరియు ప్రదేశ వివరణ త్వరలో పంపిస్తాము.</p>
         )}
         {import.meta.env.DEV && !showVenue && (
           <p className="mt-2 text-xs text-maroon">[dev] Fill in venue.name and venue.address in src/data/engagement.ts</p>
@@ -148,7 +149,7 @@ function Blessings() {
       <Reveal>
         <div className="frame px-6 py-14 sm:px-14">
           <Lotus className="mx-auto mb-4 w-14" />
-          <h2 id="bless-h" className="display text-3xl text-maroon sm:text-4xl">{messages.familyHeading}</h2>
+          <h2 id="bless-h" className="display text-3xl text-maroon sm:text-4xl">Family Blessings</h2>
           <p lang="te" className="te mt-2 text-lg text-maroon-soft">{messages.familyHeadingTe}</p>
           <Divider className="my-6" />
           {fams.length > 0 ? (
@@ -162,7 +163,7 @@ function Blessings() {
             </div>
           ) : (
             <>
-              <p className="display mx-auto max-w-lg text-lg italic text-maroon-soft sm:text-xl">{messages.familyGeneral}</p>
+              <p lang="te" className="te display mx-auto max-w-lg text-lg italic text-maroon-soft sm:text-xl">{messages.familyGeneral}</p>
               <p lang="te" className="te mx-auto mt-3 max-w-lg text-base text-maroon-soft">{messages.familyGeneralTe}</p>
             </>
           )}
@@ -191,12 +192,12 @@ function Closing() {
         <div className="frame px-6 py-14 sm:px-12">
           <JasmineGarland className="absolute -left-2 -top-3 w-24 sm:w-32" count={4} />
           <JasmineGarland className="absolute -right-2 -top-3 w-24 sm:w-32" count={4} />
-          <h2 id="closing-h" className="display text-2xl text-maroon sm:text-3xl">{messages.closing1}</h2>
-          <p className="display mt-4 text-lg italic text-maroon-soft sm:text-xl">{messages.closing2}</p>
+          <h2 id="closing-h" className="display text-2xl text-maroon sm:text-3xl">Join Us in Celebrating</h2>
+          <p lang="te" className="te display mt-4 text-lg italic text-maroon-soft sm:text-xl">{messages.closing2}</p>
           <p lang="te" className="te mt-4 text-base text-maroon-soft">{messages.closingTe}</p>
           <Divider className="my-6" />
           <p className="display text-xl italic text-gold-deep">{messages.closingWith}</p>
-          <p className="display mt-1 text-3xl font-medium text-maroon sm:text-4xl">{person1.en} &amp; {person2.en}</p>
+          <p lang="te" className="te display mt-1 text-3xl font-medium text-maroon sm:text-4xl">{person1.teShort} &amp; {person2.teShort}</p>
           <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap">
             {canShare && (
               <button type="button" className="btn btn-primary" onClick={() => run(nativeShare)}>
@@ -204,11 +205,12 @@ function Closing() {
               </button>
             )}
             <a className={`btn ${canShare ? 'btn-ghost' : 'btn-primary'}`} href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
-              <MessageCircle size={16} /> {canShare ? 'WhatsApp' : 'Share Our Invitation on WhatsApp'}
+              <MessageCircle size={16} /> {canShare ? 'WhatsApp' : 'Share on WhatsApp'}
             </a>
             <button type="button" className="btn btn-ghost" onClick={() => run(copyLink)}>
               <Copy size={16} /> Copy Link
             </button>
+            <MusicControl />
           </div>
           <p role="status" aria-live="polite" className={`mt-4 min-h-6 text-sm ${status?.ok ? 'text-sage' : 'text-maroon'}`}>
             {status && (<>{status.ok && <Check size={14} className="mr-1 inline" />}{status.message}</>)}
