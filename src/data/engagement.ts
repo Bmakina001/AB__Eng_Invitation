@@ -67,8 +67,7 @@ export const engagement: EngagementConfig = {
     openingBlessing: 'With the blessings of our families',
     tagline: 'Two families, one beautiful beginning',
     announceIntro:
-      'Some stories begin with a glance,some with a smile,and some with two hearts finding their way to each other.\n♡\nWith hearts full of happiness and families wrapped in love, we invite you to join us as we turn a beautiful \n “you and me” into a joyful “we.”', // i wantto seperate the line after teh heart symbol
-      
+      'Some stories begin with a glance,some with a smile,and some with two hearts finding their way to each other.\n♡\nWith hearts full of happiness and families wrapped in love, we invite you to join us as we turn a beautiful \n “you and me” into a joyful “we.”', 
     announceOutro:
       "Two smiles, two families, a thousand blessings, and a brand-new story waiting to unfold. Come share our laughter,bless our beginning, and make our special day a memory we’ll cherish forever.\n♡\nWith love in our hearts and smiles all around,we can’t wait to celebrate with you!",
     familyHeading: 'With love and blessings from our families',
