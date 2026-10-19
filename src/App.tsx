@@ -2,7 +2,7 @@ import { ArrowUp, CalendarPlus, Check, Copy, MapPin, Share2, MessageCircle, Cloc
 import { useEffect, useState } from 'react'
 import { engagement, formattedDate, hasVenue } from './data/engagement'
 import { copyLink, downloadIcs, nativeShare, whatsappUrl, type ShareResult } from './lib'
-import { CornerOrnament, Divider, JasmineGarland, Kolam, Lamp, Lotus, TempleArch, Toranam } from './components/Art'
+import { CornerOrnament, Divider, JasmineGarland, Lotus, Toranam } from './components/Art'
 import Countdown from './components/Countdown'
 import Gallery from './components/Gallery'
 import MusicControl from './components/MusicControl'
@@ -40,31 +40,6 @@ function Announcement() {
         </div>
       </Reveal>
     </Section>
-  )
-}
-
-function NameArt() {
-  return (
-    <section className="relative overflow-hidden bg-paper px-5 py-24 sm:py-32" aria-labelledby="names-h">
-      <TempleArch className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-full w-full max-w-md opacity-40" />
-      <JasmineGarland className="absolute left-0 top-6 w-32 sm:w-56" count={6} />
-      <JasmineGarland className="absolute right-0 top-6 w-32 sm:w-56" count={6} />
-      <Reveal className="relative mx-auto max-w-2xl text-center">
-        <p className="eyebrow mt-1">The Engagement of</p>
-        <h2 id="names-h" className="display mt-8 text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person1.short}</h2>
-        <div className="my-5 flex items-center justify-center gap-4" aria-hidden="true">
-          <span className="h-px w-16 bg-gold sm:w-28" />
-          <Lamp className="w-7" />
-          <span className="display text-4xl italic text-gold">&amp;</span>
-          <Lamp className="w-7" />
-          <span className="h-px w-16 bg-gold sm:w-28" />
-        </div>
-        <p className="display text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person2.short}</p>
-        <Divider className="mt-8" />
-        <p className="eyebrow mt-6 !text-maroon">{formattedDate()}</p>
-        <Kolam className="mx-auto mt-8 w-32" />
-      </Reveal>
-    </section>
   )
 }
 
