@@ -1,66 +1,86 @@
-import { Music, Pause, Play } from 'lucide-react'
+import { Volume2, VolumeX } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { engagement } from '../data/engagement'
 
 export default function MusicControl() {
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
   const [hasError, setHasError] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  const hasAudio = engagement.music.trim() !== ''
+  const hasAudio = Boolean(engagement.music && engagement.music.trim() !== '')
 
   useEffect(() => {
-    if (!audioRef.current || !hasAudio) return
+    const audio = audioRef.current
+    if (!audio || !hasAudio) return
 
-    audioRef.current.addEventListener('play', () => setIsPlaying(true))
-    audioRef.current.addEventListener('pause', () => setIsPlaying(false))
-    audioRef.current.addEventListener('error', () => setHasError(true))
+    const handlePlay = () => setIsPlaying(true)
+    const handlePause = () => setIsPlaying(false)
+    const handleError = () => setHasError(true)
 
-    // Autoplay music when component mounts
-    audioRef.current.play().catch(() => {
-      // Browser blocked autoplay - user needs to click play button
-      console.log('Autoplay blocked by browser policy')
-    })
+    audio.addEventListener('play', handlePlay)
+    audio.addEventListener('pause', handlePause)
+    audio.addEventListener('error', handleError)
+
+    // Attempt to autoplay after a short delay
+    const playAttempt = setTimeout(() => {
+      audio.play().catch(() => {
+        // Browser blocked autoplay - that's okay, user can click button
+        setIsPlaying(false)
+      })
+    }, 500)
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener('play', () => setIsPlaying(true))
-        audioRef.current.removeEventListener('pause', () => setIsPlaying(false))
-        audioRef.current.removeEventListener('error', () => setHasError(true))
-      }
+      clearTimeout(playAttempt)
+      audio.removeEventListener('play', handlePlay)
+      audio.removeEventListener('pause', handlePause)
+      audio.removeEventListener('error', handleError)
     }
   }, [hasAudio])
 
   const toggle = () => {
-    if (!hasAudio || !audioRef.current) return
+    const audio = audioRef.current
+    if (!audio || !hasAudio) return
+
     if (isPlaying) {
-      audioRef.current.pause()
+      audio.pause()
     } else {
-      audioRef.current.play().catch(() => setHasError(true))
+      audio.play().catch(() => {
+        setHasError(true)
+      })
     }
   }
 
+  if (!hasAudio || hasError) return null
+
   return (
     <>
-      {hasAudio && <audio ref={audioRef} src={engagement.music} loop autoPlay />}
+      <audio ref={audioRef} src={engagement.music} loop preload="metadata" />
       <button
         type="button"
-        className="btn btn-ghost"
         onClick={toggle}
-        disabled={!hasAudio || hasError}
-        aria-label={isPlaying ? 'Pause music' : 'Play music'}
-        title={!hasAudio ? 'Music not configured' : hasError ? 'Music file not found' : ''}
+        aria-label={isPlaying ? 'Pause background music' : 'Play traditional background music'}
+        title={isPlaying ? 'Pause Music' : 'Play Music (Sita Kalyanam)'}
+        className="fixed bottom-5 left-5 z-40 flex items-center gap-2 px-3.5 py-2 rounded-full border border-[#B9955B]/60 bg-[#FFF8EF]/90 text-[#702633] shadow-md backdrop-blur-sm hover:bg-[#FAF4EB] hover:border-[#B9955B] hover:text-[#8C3A48] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B9955B]"
       >
-        {!hasAudio ? (
-          <Music size={16} className="opacity-50" />
-        ) : hasError ? (
-          <Music size={16} className="opacity-50" />
-        ) : isPlaying ? (
-          <Pause size={16} />
+        {isPlaying ? (
+          <>
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B9955B] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#8E6C36]" />
+            </span>
+            <Volume2 size={16} className="text-[#8E6C36]" />
+            <span className="font-body text-xs tracking-wider uppercase font-medium hidden sm:inline">
+              Music Playing
+            </span>
+          </>
         ) : (
-          <Play size={16} />
+          <>
+            <VolumeX size={16} className="text-[#8C3A48]/70" />
+            <span className="font-body text-xs tracking-wider uppercase font-medium hidden sm:inline">
+              Play Music
+            </span>
+          </>
         )}
-        {!hasAudio ? 'Music' : hasError ? 'Music unavailable' : isPlaying ? 'Pause' : 'Play'} Music
       </button>
     </>
   )

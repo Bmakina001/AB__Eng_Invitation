@@ -1,251 +1,101 @@
-# Bhargav & Abhizna — Engagement Invitation
+# Bhargav & Abhizna — Cinematic Engagement Envelope Invitation Website
 
-A premium, hand-crafted digital engagement invitation website for Bhargav Makina and Abhizna Lankoji, combining traditional South Indian artistry with elegant, modern web design.
+A luxury, bespoke digital engagement invitation website for **Bhargav ** and **Abhizna **, combining cinematic Indian engagement aesthetics with modern editorial web design.
 
-## Overview
+---
 
-This is a fully responsive, animated engagement invitation built with:
+## Experience Overview
 
-- **React** + **TypeScript** for maintainability
-- **Vite** for fast development and optimized builds
-- **Tailwind CSS** for elegant, accessible styling
-- **Motion** for smooth, respectful animations
-- **Original SVG illustrations** for decorative elements
-- **English content**
+### 1. Full-Screen Interactive Luxury Envelope Cover
+The invitation opens directly into the original **“SAVE THE DATE”** envelope poster, framed edge-to-edge on mobile and elegantly letterboxed in a cinematic ambient room on desktop.
+- Retains the couple's photograph, floral chandeliers, October 2026 calendar (with Oct 30 highlighted with a heart), and champagne gold envelope folds.
+- Features an accessible, interactive central wax seal button (**“TAP TO OPEN”**) with subtle breathing hover cues, keyboard focus states, and tactile click response.
 
-### Features
+### 2. Multi-Phase Cinematic Envelope Opening Transition
+Clicking or pressing the seal triggers a smooth 4-phase transition:
+- **Phase 1 — Seal Response (~250ms):** Tactile press feedback, gentle golden radiance, and subtle ambient dimming.
+- **Phase 2 — Envelope Opening (~700ms):** Restrained physical opening sensation where the envelope parts and the ivory invitation card glides up into full view.
+- **Phase 3 — Invitation Reveal (~500ms):** The original artwork dissolves into a fixed, softly blurred atmospheric background layer, and the welcome card sharpens with staged typographic reveals.
+- **Phase 4 — Natural Scroll Flow:** The full-screen overlay seamlessly yields to natural vertical document scrolling without scroll hijacking or repeated triggers.
 
-- **Animated envelope opening** — An elegant interactive introduction
-- **English invitation** — Headings, details, and messages all in English
-- **Countdown timer** — Days, hours, minutes, and seconds until the event
-- **Event details** — Date, time, venue with Google Maps directions
-- **Engagement & dinner** — Presented as a unified celebration
-- **WhatsApp sharing** — Easy sharing of the invitation URL
-- **Calendar integration** — Add to calendar functionality
-- **Music control** — Optional background music (play/pause)
-- **Photo gallery** — Lightbox viewer for moments
-- **Mobile-first design** — Beautiful on all screen sizes
-- **Accessibility** — Keyboard navigation, reduced-motion support, semantic HTML
+### 3. Dedicated Atmospheric Background Layer
+- Uses the authentic portrait background softly blurred (~7px) with low opacity (~18%) and a warm ivory translucent overlay (`rgba(255, 248, 239, 0.82)`).
+- Never blurs foreground text or cards, keeping all typography razor-sharp and legible.
 
-## Setup
+### 4. Continuous Vertically Scrollable Invitation (7 Editorial Sections)
+1. **Section 1 — Invitation Welcome:** Refined ivory invitation card with architectural temple arch motif, “Auspicious Beginnings”, “With the blessings of our families”, “ENGAGEMENT CEREMONY”, high-contrast serif couple names, and subtle “Scroll to discover” cue.
+2. **Section 2 — Romantic Invitation Message:** Center-aligned editorial copy with antique-gold lines and lotus motif:
+   *“Some stories begin with a glance, some with a smile, and some with two hearts finding their way to each other…”*
+3. **Section 3 — Couple Portrait:** Framed editorial portrait of Bhargav & Abhizna in an arched gold border against the ambient floral garden.
+4. **Section 4 — Engagement Date & Live Countdown:** **Friday, 30 October 2026** with real-time countdown in `Asia/Kolkata` (IST) timezone and graceful celebration fallback after event start.
+5. **Section 5 — Event Details:**
+   - **Event:** Engagement Ceremony and Dinner
+   - **Date:** Friday, 30 October 2026
+   - **Time:** 7:30 PM onwards
+   - **Venue:** Pallem Maneswari Nilayam
+   - **Address:** 41-1/3-44, 2nd Line, Dwarakanagar, Krishna Lanka, Vijayawada, Andhra Pradesh 520013
+   - One-click **Get Directions** (Google Maps) and **Add to Calendar** (.ics file download).
+6. **Section 6 — Closing Blessing:** Heartfelt blessing copy with couple sign-off and lotus ornament.
+7. **Section 7 — Share Invitation:** Minimal WhatsApp sharing with prefilled invitation message and live URL, plus copy-to-clipboard and native device sharing.
 
-### Requirements
+### 5. Traditional Sita Kalyanam Instrumental Music
+- Subtle, accessible floating audio controller in the corner to enjoy traditional wedding/engagement instrumental music without obtrusive autoplays.
 
-- Node.js 20+ and npm
+---
+
+## Technical Architecture
+
+- **Framework:** React 19 + TypeScript + Vite 8
+- **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`) with custom luxury color palette:
+  - Warm Ivory: `#FFF8EF`
+  - Soft Champagne: `#E9D4B5`
+  - Antique Gold: `#B9955B`
+  - Deep Maroon: `#702633`
+  - Muted Rose: `#B87B7C`
+  - Warm Charcoal: `#3D3028`
+- **Typography:** Google Fonts:
+  - High-Contrast Display Serif: *Cormorant Garamond*
+  - Delicate Romantic Script: *Allura*
+  - Clean Readable Body: *DM Sans*
+- **Animation:** `motion/react` with strict `prefers-reduced-motion` compliance.
+
+---
+
+## Setup & Running Locally
 
 ### Installation
-
 ```bash
 npm install
 ```
 
-### Development
-
-Run the local development server:
-
+### Development Server
 ```bash
 npm run dev
 ```
+Open `http://localhost:5173` in your browser.
 
-The site will be available at `http://localhost:5173`.
-
-### Production Build
-
-Verify everything builds correctly:
-
+### Production Build & Preview
 ```bash
 npm run build
 npm run preview
 ```
-
-The production build is optimized and ready for deployment.
-
-## Editing the Invitation
-
-All invitation details are centralized in a single configuration file. To update engagement details, family names, messages, or theme colors:
-
-### Edit `src/data/engagement.ts`
-
-This file contains:
-
-- **Couple names** — Full names and short names
-- **Event details** — Date, time, title, time zone
-- **Venue information** — Name, address, and Google Maps URL
-- **Messages** — English copy for all sections
-- **Family details** — Optional family names and greetings
-- **Theme colors** — Ivory, gold, maroon, and green palette
-- **Gallery images** — Photo file references
-- **Background music** — Audio file path (optional)
-- **SEO metadata** — Page title and description
-
-All text is driven by this configuration. Changes here automatically update the entire website.
-
-## Adding Background Music
-
-The invitation supports optional traditional instrumental background music.
-
-### Add Music
-
-1. Place your music file in `src/assets/` (e.g., `src/assets/engagement-music.mp3`)
-2. Update the `music` field in `src/data/engagement.ts`:
-   ```typescript
-   music: '/engagement-music.mp3'
-   ```
-3. The music control will appear on the website with play/pause controls
-
-### Music Requirements
-
-- Format: MP3, WAV, OGG, or WEBP (browser-supported audio)
-- The audio will not autoplay
-- A visible play/pause button appears when music is configured
-- The audio loops continuously while playing
-
-## Adding Photos to the Gallery
-
-To include engagement photos:
-
-1. Place image files in `src/assets/gallery/` (JPEG, PNG, WEBP, or AVIF)
-2. Add entries to the `gallery` array in `src/data/engagement.ts`:
-   ```typescript
-   gallery: [
-     { file: 'photo-1.jpg', alt: 'Description of photo' },
-     { file: 'photo-2.jpg', alt: 'Another photo' },
-   ]
-   ```
-3. Images will appear in a responsive grid with a lightbox viewer
-
-## Deployment
-
-This is a static site with no backend. It's ready to deploy to any static hosting service.
-
-### Cloudflare Pages (Recommended)
-
-Cloudflare Pages offers fast, free hosting with automatic deployments from GitHub.
-
-#### Step 1: Create a GitHub Repository
-
-```bash
-git init
-git add .
-git commit -m "Initial engagement invitation"
-git branch -M main
-git remote add origin https://github.com/yourusername/engagement-invitation.git
-git push -u origin main
-```
-
-#### Step 2: Deploy to Cloudflare Pages
-
-1. Go to [Cloudflare Pages](https://pages.cloudflare.com)
-2. Sign in or create a free account
-3. Click **Create a project** → **Connect to Git**
-4. Select your GitHub repository
-5. Configure build settings:
-   - **Framework preset**: Vite
-   - **Build command**: `npm run build`
-   - **Build output directory**: `dist`
-6. Click **Save and Deploy**
-
-Your invitation will be live at a Cloudflare-generated URL (e.g., `https://engagement-invitation.pages.dev`).
-
-#### Step 3: Custom Domain (Optional)
-
-To use a custom domain (e.g., `bhargav-abhizna.com`):
-
-1. In Cloudflare Pages project settings, go to **Custom domains**
-2. Click **Add custom domain**
-3. Follow the DNS setup instructions
-4. Your invitation will be available at your custom domain
-
-### Other Static Hosting Services
-
-The site builds to the `dist/` folder and works with:
-
-- **Vercel** — `vercel deploy`
-- **Netlify** — Drag-and-drop `dist/` folder or connect GitHub
-- **GitHub Pages** — Push to `gh-pages` branch
-- **AWS S3 + CloudFront** — Upload `dist/` contents
-- **Your own server** — Copy `dist/` to your web root
-
-## Sharing the Invitation
-
-Once deployed, share the public URL:
-
-- **Copy & paste** — Share the URL directly in messages
-- **WhatsApp** — Click the WhatsApp button on the site
-- **Email** — Send the URL in an email
-- **Social media** — Post the link on your profiles
-- **QR code** — Generate a QR code pointing to your URL (free QR code generators available online)
-
-## Design Details
-
-### Color Palette
-
-- **Ivory** (#FFF9F0) — Background and primary text
-- **Warm Paper** (#F5EBDD) — Section backgrounds
-- **Antique Gold** (#B08D57) — Decorative elements
-- **Soft Gold** (#D8BD83) — Secondary accents
-- **Deep Maroon** (#641E2B) — Headings and text
-- **Muted Green** (#4E624B) — Subtle accents
-
-### Typography
-
-- **Display font** — Cormorant Garamond (English display)
-- **Body font** — Jost (English body text)
-
-All fonts are loaded from Google Fonts with fallbacks for offline use.
-
-### Decorative Elements
-
-Original SVG illustrations include:
-
-- Temple arch (gopuram-inspired)
-- Mango-leaf toranam
-- Jasmine flowers
-- Lotus motifs
-- Kolam patterns
-- Brass lamps
-- Ornamental dividers
-- Wax seal elements
-
-All illustrations are scalable, lightweight, and responsive.
-
-## Browser Support
-
-Tested and working on:
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers (iOS Safari, Chrome Android)
-
-## Accessibility
-
-The invitation is built with accessibility in mind:
-
-- ✓ Semantic HTML structure
-- ✓ Keyboard-navigable (Tab, Enter, Arrow keys)
-- ✓ Visible focus states
-- ✓ Appropriate alt text for illustrations
-- ✓ Support for `prefers-reduced-motion`
-- ✓ ARIA labels and roles
-- ✓ High contrast text
-- ✓ Touch-friendly interactive areas
-
-## Performance
-
-- Optimized build: ~392 KB JavaScript, ~24.66 KB CSS (gzipped)
-- Fast initial load and smooth interactions
-- Lazy-loaded images
-- Minimal external dependencies
-
-## License
-
-MIT. See [LICENSE](LICENSE) for details.
-
-## Support & Contributing
-
-This is a bespoke invitation created for Bhargav & Abhizna. If you'd like to customize it further or report issues, please review the source code or contact the maintainer.
+Runs on `http://localhost:4173`.
 
 ---
 
-**Made with ❤️ for a beautiful beginning.**
+## Deployment to Cloudflare Pages / Vercel
+
+1. Push the code to GitHub:
+   ```bash
+   git add .
+   git commit -m "feat: cinematic engagement envelope website with elegant scroll experience"
+   git push origin main
+   ```
+2. Connect repository to **Cloudflare Pages** or **Vercel**:
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+3. The deployed website URL will automatically populate the WhatsApp sharing feature.
+
+---
+
+**Crafted with love for Bhargav  & Abhizna .**
