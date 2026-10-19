@@ -30,10 +30,9 @@ export const eventTitle = () =>
 const eventDescription = () => {
   const { event, venue } = engagement
   return [
-    `${event.titleEn} (${event.titleTe})`,
+    event.titleEn,
     formattedDate(),
     event.timeLabel,
-    venue.name,
     venue.address,
     'With the blessings of our families.',
   ]
@@ -55,7 +54,7 @@ export const buildIcs = (): string => {
     lines.push(`DTSTART;VALUE=DATE:${ymd}`, `DTEND;VALUE=DATE:${next.toISOString().slice(0, 10).replace(/-/g, '')}`)
   }
   lines.push(`SUMMARY:${escapeIcs(eventTitle())}`, `DESCRIPTION:${escapeIcs(eventDescription())}`)
-  if (venue.name || venue.address) lines.push(`LOCATION:${escapeIcs([venue.name, venue.address].filter(Boolean).join(', '))}`)
+  if (venue.address) lines.push(`LOCATION:${escapeIcs(venue.address)}`)
   if (venue.mapUrl) lines.push(`URL:${venue.mapUrl}`)
   lines.push('END:VEVENT', 'END:VCALENDAR')
   return lines.map(fold).join('\r\n') + '\r\n'

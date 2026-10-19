@@ -1,6 +1,6 @@
 import { ArrowUp, CalendarPlus, Check, Copy, MapPin, Share2, MessageCircle, Clock } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { engagement, formattedDate, formattedDateTe, hasVenue } from './data/engagement'
+import { engagement, formattedDate, hasVenue } from './data/engagement'
 import { copyLink, downloadIcs, nativeShare, whatsappUrl, type ShareResult } from './lib'
 import { CornerOrnament, Divider, JasmineGarland, Kolam, Lamp, Lotus, TempleArch, Toranam } from './components/Art'
 import Countdown from './components/Countdown'
@@ -30,15 +30,13 @@ function Announcement() {
           <CornerOrnament className="absolute -bottom-1 -right-1 w-12 -scale-100 sm:w-16" />
           <Lotus className="mx-auto mb-4 w-16" />
           <h2 id="announce-h" className="display text-2xl font-semibold text-maroon sm:text-3xl">Engagement Celebration</h2>
-          <p lang="te" className="te mx-auto mt-3 max-w-xl text-base text-maroon-soft sm:text-lg">{messages.announceIntroTe}</p>
           <Divider className="my-6" />
-          <p lang="te" className="te mx-auto max-w-xl text-xl text-maroon sm:text-2xl">{messages.announceIntro}</p>
-          <p lang="te" className="te mt-6 text-4xl font-medium text-maroon sm:text-5xl">{person1.te}</p>
+          <p className="display mx-auto max-w-xl whitespace-pre-line text-xl text-maroon sm:text-2xl">{messages.announceIntro}</p>
+          <p className="display mt-6 text-4xl font-medium text-maroon sm:text-5xl">{person1.en}</p>
           <p className="display my-1 text-2xl italic text-gold">&amp;</p>
-          <p lang="te" className="te text-4xl font-medium text-maroon sm:text-5xl">{person2.te}</p>
+          <p className="display text-4xl font-medium text-maroon sm:text-5xl">{person2.en}</p>
           <Divider className="my-6" />
-          <p lang="te" className="te mx-auto max-w-xl text-lg italic text-maroon-soft sm:text-xl">{messages.announceOutro}</p>
-          <p lang="te" className="te mx-auto mt-3 max-w-xl text-base text-maroon-soft sm:text-lg">{messages.announceOutroTe}</p>
+          <p className="display mx-auto max-w-xl whitespace-pre-line text-lg italic text-maroon-soft sm:text-xl">{messages.announceOutro}</p>
         </div>
       </Reveal>
     </Section>
@@ -52,10 +50,8 @@ function NameArt() {
       <JasmineGarland className="absolute left-0 top-6 w-32 sm:w-56" count={6} />
       <JasmineGarland className="absolute right-0 top-6 w-32 sm:w-56" count={6} />
       <Reveal className="relative mx-auto max-w-2xl text-center">
-        <p lang="te" className="te text-lg text-maroon-soft">నిశ్చితార్థం</p>
         <p className="eyebrow mt-1">The Engagement of</p>
-        <h2 id="names-h" lang="te" className="te display mt-8 text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person1.short}</h2>
-        <p lang="te" className="te text-xl text-maroon-soft">{person1.teShort}</p>
+        <h2 id="names-h" className="display mt-8 text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person1.short}</h2>
         <div className="my-5 flex items-center justify-center gap-4" aria-hidden="true">
           <span className="h-px w-16 bg-gold sm:w-28" />
           <Lamp className="w-7" />
@@ -63,8 +59,7 @@ function NameArt() {
           <Lamp className="w-7" />
           <span className="h-px w-16 bg-gold sm:w-28" />
         </div>
-        <p lang="te" className="te display text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person2.short}</p>
-        <p lang="te" className="te text-xl text-maroon-soft">{person2.teShort}</p>
+        <p className="display text-[3rem] font-medium leading-none text-maroon sm:text-7xl">{person2.short}</p>
         <Divider className="mt-8" />
         <p className="eyebrow mt-6 !text-maroon">{formattedDate()}</p>
         <Kolam className="mx-auto mt-8 w-32" />
@@ -77,7 +72,6 @@ function CountdownSection() {
   return (
     <Section labelledBy="count-h">
       <Reveal>
-        <p lang="te" className="te text-lg text-maroon-soft">నిశ్చితార్థానికి ఇంకా</p>
         <h2 id="count-h" className="display mb-8 text-3xl text-maroon sm:text-4xl">Until Our Engagement</h2>
         <Countdown />
       </Reveal>
@@ -100,29 +94,25 @@ function Details() {
   return (
     <section className="bg-paper px-5 py-20 sm:py-28" aria-labelledby="details-h">
       <Reveal className="mx-auto max-w-xl text-center">
-        <p lang="te" className="te text-lg text-maroon-soft">వేడుక వివరాలు</p>
         <h2 id="details-h" className="display text-4xl text-maroon sm:text-5xl">Event Details</h2>
         <div className="frame mt-8 divide-y divide-gold/30 px-5 py-4">
           <Row icon={<Lotus className="w-10" />} label="Event">
             <span className="block text-lg text-maroon">{event.titleEn}</span>
-            <span lang="te" className="te block text-base text-maroon-soft">{event.titleTe}</span>
           </Row>
           <Row icon={<CalendarPlus size={20} />} label="Date">
             {formattedDate()}
-            <span lang="te" className="te block text-base text-maroon-soft">{formattedDateTe()}</span>
           </Row>
           {event.timeLabel && (
             <Row icon={<Clock size={20} />} label="Time">{event.timeLabel}</Row>
           )}
           {showVenue && (
             <Row icon={<MapPin size={20} />} label="Venue">
-              {venue.name}
               <span className="block font-sans text-base text-maroon-soft">{venue.address}</span>
             </Row>
           )}
         </div>
         {!showVenue && (
-          <p lang="te" className="te mt-4 text-sm italic text-maroon-soft">సమయం మరియు ప్రదేశ వివరణ త్వరలో పంపిస్తాము.</p>
+          <p className="mt-4 text-sm italic text-maroon-soft">Time and venue details will be shared soon.</p>
         )}
         {import.meta.env.DEV && !showVenue && (
           <p className="mt-2 text-xs text-maroon">[dev] Fill in venue.name and venue.address in src/data/engagement.ts</p>
@@ -150,7 +140,6 @@ function Blessings() {
         <div className="frame px-6 py-14 sm:px-14">
           <Lotus className="mx-auto mb-4 w-14" />
           <h2 id="bless-h" className="display text-3xl text-maroon sm:text-4xl">Family Blessings</h2>
-          <p lang="te" className="te mt-2 text-lg text-maroon-soft">{messages.familyHeadingTe}</p>
           <Divider className="my-6" />
           {fams.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2">
@@ -162,10 +151,7 @@ function Blessings() {
               ))}
             </div>
           ) : (
-            <>
-              <p lang="te" className="te display mx-auto max-w-lg text-lg italic text-maroon-soft sm:text-xl">{messages.familyGeneral}</p>
-              <p lang="te" className="te mx-auto mt-3 max-w-lg text-base text-maroon-soft">{messages.familyGeneralTe}</p>
-            </>
+            <p className="display mx-auto max-w-lg text-lg italic text-maroon-soft sm:text-xl">{messages.familyGeneral}</p>
           )}
         </div>
       </Reveal>
@@ -193,11 +179,10 @@ function Closing() {
           <JasmineGarland className="absolute -left-2 -top-3 w-24 sm:w-32" count={4} />
           <JasmineGarland className="absolute -right-2 -top-3 w-24 sm:w-32" count={4} />
           <h2 id="closing-h" className="display text-2xl text-maroon sm:text-3xl">Join Us in Celebrating</h2>
-          <p lang="te" className="te display mt-4 text-lg italic text-maroon-soft sm:text-xl">{messages.closing2}</p>
-          <p lang="te" className="te mt-4 text-base text-maroon-soft">{messages.closingTe}</p>
+          <p className="display mt-4 text-lg italic text-maroon-soft sm:text-xl">{messages.closing2}</p>
           <Divider className="my-6" />
           <p className="display text-xl italic text-gold-deep">{messages.closingWith}</p>
-          <p lang="te" className="te display mt-1 text-3xl font-medium text-maroon sm:text-4xl">{person1.teShort} &amp; {person2.teShort}</p>
+          <p className="display mt-1 text-3xl font-medium text-maroon sm:text-4xl">{person1.short} &amp; {person2.short}</p>
           <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap">
             {canShare && (
               <button type="button" className="btn btn-primary" onClick={() => run(nativeShare)}>
@@ -249,7 +234,6 @@ export default function App() {
       {opened && (
         <main className="paper">
           <Announcement />
-          <NameArt />
           <CountdownSection />
           <Details />
           <Blessings />

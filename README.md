@@ -11,12 +11,12 @@ This is a fully responsive, animated engagement invitation built with:
 - **Tailwind CSS** for elegant, accessible styling
 - **Motion** for smooth, respectful animations
 - **Original SVG illustrations** for decorative elements
-- **Bilingual content** (Telugu & English)
+- **English content**
 
 ### Features
 
 - **Animated envelope opening** — An elegant interactive introduction
-- **Bilingual invitations** — Telugu headings with English details
+- **English invitation** — Headings, details, and messages all in English
 - **Countdown timer** — Days, hours, minutes, and seconds until the event
 - **Event details** — Date, time, venue with Google Maps directions
 - **Engagement & dinner** — Presented as a unified celebration
@@ -68,10 +68,10 @@ All invitation details are centralized in a single configuration file. To update
 
 This file contains:
 
-- **Couple names** — English and Telugu versions
+- **Couple names** — Full names and short names
 - **Event details** — Date, time, title, time zone
 - **Venue information** — Name, address, and Google Maps URL
-- **Messages** — English and Telugu copy for all sections
+- **Messages** — English copy for all sections
 - **Family details** — Optional family names and greetings
 - **Theme colors** — Ivory, gold, maroon, and green palette
 - **Gallery images** — Photo file references
@@ -191,7 +191,6 @@ Once deployed, share the public URL:
 
 - **Display font** — Cormorant Garamond (English display)
 - **Body font** — Jost (English body text)
-- **Telugu font** — Noto Serif Telugu (Telugu text)
 
 All fonts are loaded from Google Fonts with fallbacks for offline use.
 

@@ -58,15 +58,15 @@ export default function Opening({ onOpened }: { onOpened: () => void }) {
         </motion.div>
 
         <div className="relative z-10 flex max-h-full flex-col items-center overflow-y-auto px-8 py-24 text-center">
-          <p lang="te" className="te text-3xl font-semibold text-maroon sm:text-4xl">శుభమస్తు</p>
-          <p lang="te" className="te display mt-3 text-base italic text-maroon-soft sm:text-lg">{messages.openingBlessing}</p>
+          <p className="display text-3xl font-semibold text-maroon sm:text-4xl">Auspicious Beginnings</p>
+          <p className="display mt-3 text-base italic text-maroon-soft sm:text-lg">{messages.openingBlessing}</p>
           <p className="eyebrow mt-5">{engagement.event.titleEn}</p>
-          <h1 lang="te" className="te display mt-4 text-[2.6rem] font-medium leading-[1.05] text-maroon sm:text-6xl">
-            {person1.te}
+          <h1 className="display mt-4 text-[2.6rem] font-medium leading-[1.05] text-maroon sm:text-6xl">
+            {person1.en}
             <span className="my-1 block text-3xl italic text-gold sm:text-4xl" aria-label="and">&amp;</span>
-            {person2.te}
+            {person2.en}
           </h1>
-          <p lang="te" className="te mt-4 text-sm text-maroon-soft sm:text-base">నిశ్చితార్థ వేడుకకు సాదర ఆహ్వానం</p>
+          <p className="mt-4 text-sm text-maroon-soft sm:text-base">A warm invitation to our engagement ceremony</p>
           <p className="display mt-3 text-base italic text-maroon-soft">{messages.tagline}</p>
           <p className="eyebrow mt-4 !text-maroon">{formattedDate()}</p>
           <div className="mt-8 flex flex-col items-center gap-3">

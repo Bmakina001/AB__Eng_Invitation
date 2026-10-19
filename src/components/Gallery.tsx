@@ -45,7 +45,6 @@ export default function Gallery() {
   return (
     <section className="px-5 py-20 sm:py-28" aria-labelledby="photos-h">
       <Reveal className="mx-auto max-w-5xl text-center">
-        <p lang="te" className="te text-lg text-maroon-soft">మా క్షణాలు</p>
         <h2 id="photos-h" className="display text-4xl text-maroon sm:text-5xl">Moments</h2>
         <Divider className="my-6" />
         <ul className="mt-8 columns-2 gap-3 text-left sm:columns-3 sm:gap-5">
