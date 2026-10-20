@@ -82,8 +82,8 @@ export function TempleArch({ className = '' }: { className?: string }) {
         {/* Ornamental beads on pillars */}
         {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
           <g key={i}>
-            <circle cx="33" cy="235 + i * 30" r="1.6" fill={GOLD_DEEP} opacity="0.7" />
-            <circle cx="307" cy="235 + i * 30" r="1.6" fill={GOLD_DEEP} opacity="0.7" />
+            <circle cx="33" cy={235 + i * 30} r="1.6" fill={GOLD_DEEP} opacity="0.7" />
+            <circle cx="307" cy={235 + i * 30} r="1.6" fill={GOLD_DEEP} opacity="0.7" />
           </g>
         ))}
       </g>

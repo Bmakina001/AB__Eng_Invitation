@@ -78,7 +78,7 @@ export default function EnvelopeCover({ onOpened }: EnvelopeCoverProps) {
 
       {/* Main Envelope Poster Container */}
       <motion.div
-        className="relative flex items-center justify-center w-full h-[100dvh] max-h-[100dvh] overflow-hidden"
+        className="relative w-full h-[100dvh] overflow-hidden flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{
           opacity: stage === 'opening' || stage === 'revealing' ? 0 : 1,
@@ -95,13 +95,13 @@ export default function EnvelopeCover({ onOpened }: EnvelopeCoverProps) {
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-        {/* Poster Wrapper with preserved 768:1365 aspect ratio */}
-        <div className="relative h-full max-h-[100dvh] aspect-[768/1365] max-w-full flex items-center justify-center shadow-2xl sm:rounded-xl sm:border sm:border-[#B9955B]/40 sm:max-h-[94vh] sm:my-auto overflow-hidden">
+        {/* Poster Wrapper - responsive to all screen sizes */}
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden sm:rounded-xl sm:border sm:border-[#B9955B]/40 sm:max-h-[95vh] sm:max-w-sm">
           {/* Edge-to-edge original poster */}
           <img
             src={envelopeCover}
             alt="Bhargav and Abhizna Engagement Save The Date Envelope Poster"
-            className="w-full h-full object-contain object-center select-none"
+            className="w-full h-full object-cover select-none"
             draggable={false}
           />
 
@@ -112,7 +112,7 @@ export default function EnvelopeCover({ onOpened }: EnvelopeCoverProps) {
               top: '72.6%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '28%',
+              width: 'clamp(50px, 28vw, 180px)',
               aspectRatio: '1 / 1',
             }}
           >

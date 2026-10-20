@@ -11,6 +11,7 @@ import EventDetails from './components/EventDetails'
 import ClosingBlessing from './components/ClosingBlessing'
 import InvitationShareButton from './components/InvitationShareButton'
 import MusicControl from './components/MusicControl'
+import CursorGlow from './components/CursorGlow'
 
 export default function App() {
   const [opened, setOpened] = useState(false)
@@ -52,6 +53,9 @@ export default function App() {
 
   return (
     <>
+      {/* Cursor glow effect */}
+      <CursorGlow />
+
       {/* Full-screen Cinematic Envelope Cover with Interactive Wax Seal */}
       {!opened && <EnvelopeCover onOpened={handleEnvelopeOpened} />}
 

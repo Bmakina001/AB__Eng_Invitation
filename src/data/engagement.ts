@@ -58,8 +58,8 @@ export interface EngagementConfig {
 }
 
 export const engagement: EngagementConfig = {
-  person1: { en: 'Bhargav Makina', short: 'Bhargav' },
-  person2: { en: 'Abhizna Lankoji', short: 'Abhizna' },
+  person1: { en: 'Bhargav ', short: 'Bhargav' },
+  person2: { en: 'Abhizna ', short: 'Abhizna' },
   event: {
     titleEn: 'Engagement Ceremony and Dinner',
     date: '2026-10-30',
@@ -115,7 +115,7 @@ export const engagement: EngagementConfig = {
   seo: {
     title: 'Bhargav & Abhizna — Engagement Invitation',
     description:
-      'With the blessings of our families, you are warmly invited to celebrate the engagement ceremony of Bhargav Makina and Abhizna Lankoji on Friday, 30 October 2026 in Vijayawada.',
+      'With the blessings of our families, you are warmly invited to celebrate the engagement ceremony of Bhargav  and Abhizna  on Friday, 30 October 2026 in Vijayawada.',
   },
 }
 

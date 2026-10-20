@@ -20,8 +20,9 @@ export default function InvitationWelcome() {
         <motion.div
           className="editorial-card relative z-10 p-6 sm:p-14 text-center rounded-sm overflow-hidden"
           initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Inner border */}
           <div className="pointer-events-none absolute inset-2.5 sm:inset-4 border border-[#B9955B]/30" />
