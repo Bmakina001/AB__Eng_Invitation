@@ -18,7 +18,6 @@ export interface EngagementConfig {
     durationHours: number
   }
   venue: {
-    name: string
     address: string
     mapUrl: string
   }
@@ -63,14 +62,13 @@ export const engagement: EngagementConfig = {
   event: {
     titleEn: 'Engagement Ceremony and Dinner',
     date: '2026-10-30',
-    time: '19:30',
-    timeLabel: '7:30 PM onwards',
+    time: '19:00',
+    timeLabel: '7:00 PM onwards',
     timeZone: 'Asia/Kolkata',
     utcOffset: '+05:30',
     durationHours: 4,
   },
   venue: {
-    name: 'Pallem Maneswari Nilayam',
     address: '41-1/3-44, 2nd Line, Dwarakanagar, Krishna Lanka, Vijayawada, Andhra Pradesh 520013',
     mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       'Pallem Maneswari Nilayam, 41-1/3-44, 2nd Line, Dwarakanagar, Krishna Lanka, Vijayawada, Andhra Pradesh 520013'

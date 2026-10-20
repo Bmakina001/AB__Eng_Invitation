@@ -50,7 +50,7 @@ export default function ClosingBlessing() {
           </p>
 
           <p className="font-display text-2xl sm:text-4xl font-medium text-[#702633] mt-2 tracking-wide">
-            {person1.en} &amp; {person2.en}
+            From Our Family
           </p>
 
           <p className="font-body text-xs uppercase tracking-[0.22em] text-[#8E6C36] mt-3">
