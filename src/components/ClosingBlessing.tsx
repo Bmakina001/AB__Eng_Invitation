@@ -3,7 +3,7 @@ import { engagement, formattedDate } from '../data/engagement'
 import { Divider, HeartFlourish, Lotus } from './Art'
 
 export default function ClosingBlessing() {
-  const { person1, person2, messages } = engagement
+  const { messages } = engagement
 
   return (
     <section
