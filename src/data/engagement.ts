@@ -18,7 +18,6 @@ export interface EngagementConfig {
     durationHours: number
   }
   venue: {
-    name: string
     address: string
     mapUrl: string
   }
@@ -70,7 +69,6 @@ export const engagement: EngagementConfig = {
     durationHours: 4,
   },
   venue: {
-    name: 'Pallem Maneswari Nilayam',
     address: '41-1/3-44, 2nd Line, Dwarakanagar, Krishna Lanka, Vijayawada, Andhra Pradesh 520013',
     mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       'Pallem Maneswari Nilayam, 41-1/3-44, 2nd Line, Dwarakanagar, Krishna Lanka, Vijayawada, Andhra Pradesh 520013'

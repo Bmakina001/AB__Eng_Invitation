@@ -84,9 +84,6 @@ export default function EventDetails() {
               <span className="font-body text-xs uppercase tracking-[0.22em] text-[#8E6C36] font-medium">
                 Venue
               </span>
-              <p className="font-display text-xl sm:text-2xl font-medium text-[#702633]">
-                {venue.name}
-              </p>
               <p className="font-body text-sm sm:text-base text-[#8C3A48] max-w-md mx-auto mt-1 leading-relaxed">
                 {venue.address}
               </p>
