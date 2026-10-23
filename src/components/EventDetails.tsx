@@ -36,9 +36,30 @@ export default function EventDetails() {
           <Divider className="my-6" />
 
           {/* Details Grid / Stack */}
-          <div className="divide-y divide-[#B9955B]/25 py-2">
+          <motion.div
+            className="divide-y divide-[#B9955B]/25 py-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15,
+                  delayChildren: 0.1,
+                }
+              }
+            }}
+          >
             {/* Event Name */}
-            <div className="py-5 flex flex-col items-center gap-1.5">
+            <motion.div
+              className="py-5 flex flex-col items-center gap-1.5"
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+              }}
+            >
               <span className="text-[#8E6C36]">
                 <Sparkles size={20} />
               </span>
@@ -48,10 +69,16 @@ export default function EventDetails() {
               <p className="font-display text-xl sm:text-2xl font-medium text-[#702633]">
                 {event.titleEn}
               </p>
-            </div>
+            </motion.div>
 
             {/* Date */}
-            <div className="py-5 flex flex-col items-center gap-1.5">
+            <motion.div
+              className="py-5 flex flex-col items-center gap-1.5"
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+              }}
+            >
               <span className="text-[#8E6C36]">
                 <Calendar size={20} />
               </span>
@@ -61,10 +88,16 @@ export default function EventDetails() {
               <p className="font-display text-xl sm:text-2xl font-medium text-[#702633]">
                 {formattedDate()}
               </p>
-            </div>
+            </motion.div>
 
             {/* Time */}
-            <div className="py-5 flex flex-col items-center gap-1.5">
+            <motion.div
+              className="py-5 flex flex-col items-center gap-1.5"
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+              }}
+            >
               <span className="text-[#8E6C36]">
                 <Clock size={20} />
               </span>
@@ -74,47 +107,63 @@ export default function EventDetails() {
               <p className="font-display text-xl sm:text-2xl font-medium text-[#702633]">
                 {event.timeLabel}
               </p>
-            </div>
+            </motion.div>
 
             {/* Venue & Address */}
-            <div className="py-5 flex flex-col items-center gap-1.5">
+            <motion.div
+              className="py-5 flex flex-col items-center gap-1.5"
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+              }}
+            >
               <span className="text-[#8E6C36]">
                 <MapPin size={20} />
               </span>
               <span className="font-body text-xs uppercase tracking-[0.22em] text-[#8E6C36] font-medium">
                 Venue
               </span>
-              <p className="font-body text-sm sm:text-base text-[#8C3A48] max-w-md mx-auto mt-1 leading-relaxed">
+              <p className="font-body text-sm sm:text-base text-[#8C3A48] max-w-md mx-auto mt-1 leading-relaxed whitespace-pre-line">
                 {venue.address}
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           <Divider className="my-6" />
 
           {/* Action Buttons: Get Directions & Add to Calendar */}
-          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
-            <a
+          <motion.div
+            className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <motion.a
               href={venue.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold"
-              aria-label="Get Directions to Pallem Maneswari Nilayam on Google Maps"
+              aria-label="Get Directions to AVIRA Banquets & Stays (Nilaya) on Google Maps"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
               <MapPin size={17} />
               <span>Get Directions</span>
-            </a>
+            </motion.a>
 
-            <button
+            <motion.button
               type="button"
               onClick={downloadIcs}
               className="btn-outline-gold"
               aria-label="Add Engagement Ceremony to Calendar"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
               <CalendarPlus size={17} />
               <span>Add to Calendar</span>
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </motion.div>
       </div>
     </section>
